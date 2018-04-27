@@ -1,0 +1,37 @@
+@startuml
+autonumber "<b>(<u>##</u>)"
+box "phrase 0"
+EOS社区 -> 上线技术资源池: EOS社区选出50个技术能力最强的成员作为上线技术资源池。
+上线技术资源池 --> EOS上线团队: 1.随机选出22个成员作为EOS上线团队。\n 2.22个成员需要创建高度安全的VPN连接防止上线过程中DDOS攻击\n (之后他们会公布22个成员名单，但不是马上公布) \n 3. EOS代币发放结束并且对现在EOS网络进行快照。
+EOS上线团队 --> EOS上线团队: 1. 22个成员对现有EOS网络进行快照\n并且公布结果给公众校验。\n 只要15个成员完成。
+actor "负责上线的成员" as adam
+EOS上线团队 --> adam: 他们随机选取一位成员，来启动EOS 启动节点。
+end box
+box "phrase 1"
+adam --> adam: 生成用于启动主网的密钥对。
+participant "启动节点" as biosnode
+biosnode --> biosnode: 1. 从官方拿到创世配置 \n 2.创建第一个区块. \n 以EOS系统用户并且使用adam的私钥来安装操作合约。 \n 3. 安装列表，列表包含21个ABP \n (ABP: 指定的区块生产者，并且之后负责选举) \n以及上线团队成员 \n
+participant "21 个 ABP" as ABPs
+biosnode --> ABPs: 1. 启动节点将系统算力交给ABPs。\n  2. 启动节点移除对系统控制权。
+adam --> adam: 公布私钥
+end box
+box "phrase 2"
+ABPs --> ABPs: 1. 连接启动节点\n 2. 验证EOS主网的初始化状态，\n包括账户情况，余额，并且生产区块。\n
+biosnode --> biosnode: 1. 启动节点退出。\n 2. 进入区块生产者候选池， 也就是eos 竞选参与者群体。
+participant "eos 竞选参与者" as eoscontenders
+eoscontenders --> ABPs: 1. eos竞选者连接ABPs \n 2. 对候选池区块生产者投票 （注意： \n这里所有在EOS上线技术资源池的成员也可以参与竞选,\n 除ABPs 和启动节点成员外）。
+ABPs --> ABPs: 1. 在整个过程中，唯一任务就是维持选举，\n直到21个区块生产者产生，\n这里我们叫EBPs (Elected Block Producers 胜出区块生产者) 。
+end box
+box "phrase 3"
+participant "EBPs" as EBPs
+EBPs --> EBPs: 1. 切换到当前运行的EOS 网络。\n (直到10个区块产生之后，ABPs 和启动节点才可以参与竞选。 ) \n 2. EBPs处理交易， \n 3. 10轮的竞选之后(每轮竞选产生一个区块), \n ABPs 和启动节点可以参与竞选。\n这时候会出现纷争。
+end box
+box "phrase 4"
+participant "宪法0" as constitution0
+participant "宪法1" as constitution1
+constitution0 --> constitution1: 1. 所有的eos持有者对提名的宪法投票，\n 2. 成功的宪法替换宪法0，启用宪法1\n  3. 票数占有50%获选。宪法有效期30天。\n
+end box
+box "phrase 5"
+biosnode --> biosnode: 1. 所有的代币不可转账，区块生产者没有奖励，\n 2. 1）直到15% eos 代币连接主网并且产生交易。 \n 2）宪法0升级到宪法1.
+end box
+@enduml
