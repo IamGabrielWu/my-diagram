@@ -31,7 +31,5 @@ participant "宪法0" as constitution0
 participant "宪法1" as constitution1
 constitution0 --> constitution1: 1. 所有的eos持有者对提名的宪法投票，\n 2. 成功的宪法替换宪法0，启用宪法1\n  3. 票数占有50%获选。宪法有效期30天。\n
 end box
-box "phrase 5"
-biosnode --> biosnode: 1. 所有的代币不可转账，区块生产者没有奖励，\n 2. 1）直到15% eos 代币连接主网并且产生交易。 \n 2）宪法0升级到宪法1.
-end box
+EOS社区 --> constitution1: 1. 所有的代币不可转账，区块生产者没有奖励，\n 2. 1）直到15% eos 代币连接主网并且产生交易。 \n 2）宪法0升级到宪法1.
 @enduml
